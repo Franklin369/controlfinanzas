@@ -15,12 +15,7 @@ export async function Mostrartodos() {
 }
 export async function Insertaringreso(p) {
   try {
-    await addDoc(collection(db, "ingresos"), {
-      title: "title",
-      description: "description",
-      completed: false,
-      created: "hola",
-    });
+    await addDoc(collection(db, "ingresos"), p);
     onClose();
   } catch (err) {
     swal("hola");

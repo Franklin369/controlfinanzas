@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Buttonfiltro } from "./ButtonOperacion";
+import { Buttonfiltro } from "./Btnoperaciones";
 export function Cardtotales() {
   return (
     <Container>

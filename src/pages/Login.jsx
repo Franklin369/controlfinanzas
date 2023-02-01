@@ -42,8 +42,7 @@ export const Login = () => {
           <img src={imgfinanzas} />
         </div>
         <h4>
-          El camino está por delante de ti. Ya ha dado su primer paso hacia la
-          transformación financiera y lo guiaremos en ese viaje.
+         Hola, soy el login
         </h4>
       </section>
       <section className="panelsesion">
@@ -67,11 +66,12 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   padding: 30px;
-  background: radial-gradient(#00f34a, #00bf45);
+  background: radial-gradient(#FEDD58, #FF4139);
   flex-direction: column-reverse;
   width: 100vw;
+ 
   .imgseccion {
     background-color: white;
 

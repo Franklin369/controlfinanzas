@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import { Insertaringreso } from "../api/ingresos";
+import { Insertaringreso } from "../../api/Aingresos";
 import swal from "sweetalert";
 
-import { db } from "../api/firebase.config";
+import { db } from "../../api/firebase.config";
 
 import {
   collection,
@@ -15,8 +15,16 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-export function Registraringreso({ open, onClose }) {
+import { SketchPicker, CirclePicker } from "react-color";
+
+export function Registrarcategorias({ open, onClose, tipo }) {
   if (!open) return;
+  const [currentColor, setColor] = useState("#000");
+  const appStyle = {
+   color:"red",
+    backgroundColor: currentColor,
+   
+  };
   const [message, setMessage] = useState({ error: false, msg: "" });
   const {
     register,
@@ -25,20 +33,29 @@ export function Registraringreso({ open, onClose }) {
   } = useForm();
 
   const Enviar2 = async (data) => {
-    //  await  Insertaringreso(data);
+    swal(data);
+    const p = {
+      descripcion: data.descripcion,
+      estado: "descriptiosn",
+      monto: data.monto,
+      fecha: "hola",
+      idcategoria: "1",
+      idcuenta: "2",
+    };
+
     try {
-      await addDoc(collection(db, "ingresos"), {
-        title:"yes",
-        description: "descriptiosn",
-        completed: false,
-        created: "hola",
-      });
+      await Insertaringreso(p);
+      // await addDoc(collection(db, "ingresos"), {
+
+      // });
 
       onClose();
       swal("Registrado correctamente");
     } catch (err) {}
   };
-
+  const Elegircolor = (color) => {
+    setColor(color.hex);
+  };
   return (
     <Container onClick={onClose}>
       <div
@@ -48,54 +65,27 @@ export function Registraringreso({ open, onClose }) {
         }}
       >
         <div className="header">
-          <h1>Nuevo ingreso</h1>
-          <span onClick={()=>onClose()}>x</span>
+          <h1>Registrar nueva categoria</h1>
+          <span onClick={() => onClose()}>x</span>
         </div>
 
-        <form onSubmit={handleSubmit(Enviar2)}>
+        <form className="formulario" onSubmit={handleSubmit(Enviar2)}>
           <div>
-            <label>Monto</label>
             <input
-              type="number"
-              {...register("monto", { required: true })}
+              placeholder="Nombre"
+              type="text"
+              {...register("descripcion", { required: true })}
             ></input>
-            {errors.title?.type === "required" && <p>El campo es requerido</p>}
+            {errors.title?.type === "required" && <p>Campo obligatorio</p>}
           </div>
-          <div>
-            <label>Estado</label>
-            <input type="checkbox" {...register("estado")}></input>
-          </div>
-          <div>
-            <label>Fecha</label>
-            <input
-              type="date"
-              {...register("monto", { required: true })}
-            ></input>
-            {errors.title?.type === "required" && <p>El campo es requerido</p>}
-          </div>
-          <div>
-            <label>Descripcion</label>
-            <input
-              type="number"
-              {...register("fecha", { required: true })}
-            ></input>
-            {errors.title?.type === "required" && <p>El campo es requerido</p>}
-          </div>
-          <div>
-            <label>Categoria</label>
-            <input
-              type="number"
-              {...register("idcategoria", { required: true })}
-            ></input>
-            {errors.title?.type === "required" && <p>El campo es requerido</p>}
-          </div>
-          <div>
-            <label>Cuenta</label>
-            <input
-              type="number"
-              {...register("idcuenta", { required: true })}
-            ></input>
-            {errors.title?.type === "required" && <p>El campo es requerido</p>}
+          <div className="categoriaContainer">
+            <h3>Color de la categoria</h3>
+            <span className="colorSelect" style={appStyle}></span>
+            <CirclePicker
+              color={currentColor}
+              onChange={Elegircolor}
+              onChangeComplete={Elegircolor}
+            />
           </div>
 
           <input type="submit" value="enviar" onClick={onclose}></input>
@@ -115,7 +105,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
-  z-index: 1000;
+  z-index: 1000000;
   .header {
     display: flex;
     justify-content: space-between;
@@ -126,11 +116,24 @@ const Container = styled.div`
     }
   }
   .sub-contenedor {
-    width: 600px;
+    $bgcolor: colores;
+    width: 50%;
     border-radius: 10px;
     background-color: white;
     padding: 10px 20px;
     box-shadow: 0px 5px 10px rgba(240, 249, 250, 0.5);
+    margin: 0px 20px;
+    .formulario {
+      .categoriaContainer {
+        .colorSelect {
+          height: 50px;
+          width: 50px;
+         
+
+          display: block;
+        }
+      }
+    }
     .contenido {
       display: flex;
       gap: 10px;

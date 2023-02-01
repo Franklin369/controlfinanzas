@@ -58,10 +58,10 @@ const Container = styled.div`
   position:relative;
   top: 0; */
   max-width: 100vw;
-  max-height: 100vh;
-
-  display: grid;
-  grid-template-rows: auto auto;
+  min-height: 100vh;
+  
+  display: flex;
+  /* grid-template-rows: auto auto; */
   transition: all 0.3s;
 .bodycontent{
   transition: all 0.3s;

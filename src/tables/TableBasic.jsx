@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Mostrartodos } from "../api/ingresos";
+import { Mostrartodos } from "../api/Aingresos";
 import { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";

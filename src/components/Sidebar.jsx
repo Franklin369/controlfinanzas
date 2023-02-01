@@ -11,7 +11,15 @@ import { MdOutlineAnalytics, MdLogout } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { ThemeContext } from "../App";
+import { Menudesplegable } from "../components/Menudeplegable";
+import iconoyea from "../assets/react.svg";
+//
+
+import { useRef } from "react";
+import { useState } from "react";
 export function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const [estadoMd, setEstadoMd] = useState(false);
+  const linkitem = useRef();
   const ModSidebaropen = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -31,8 +39,16 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
         </div>
         <h2>codigo369</h2>
       </div>
+      <button  onClick={()=>setEstadoMd(true)}>
+        hola
+     
+      </button>
+         <Menudesplegable
+          estado={estadoMd}
+          Onclose={() => setEstadoMd(false)}
+        ></Menudesplegable>
       {linksArray.map(({ icon, label, to }) => (
-        <div className="LinkContainer" key={label} >
+        <div className="LinkContainer" key={label}>
           <NavLink
             to={to}
             className={({ isActive }) => `Links${isActive ? ` active` : ``}`}
@@ -43,6 +59,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }) {
         </div>
       ))}
       <Divider />
+    
       {secondarylinksArray.map(({ icon, label, to }) => (
         <div className="LinkContainer" key={label}>
           <NavLink
@@ -86,9 +103,9 @@ const linksArray = [
     to: "/",
   },
   {
-    label: "Estadisticas",
+    label: "Categorias",
     icon: <MdOutlineAnalytics />,
-    to: "/ingresos",
+    to: "/categorias",
   },
   {
     label: "Productos",
@@ -126,10 +143,10 @@ const Container = styled.div`
   background: ${(props) => props.theme.bg};
   position: fixed;
   padding-top: 20px;
-  z-index:10000;
-  min-height:100vh;
-  transition:all 0.5s;
- 
+  z-index: 10000;
+  min-height: 100vh;
+  transition: all 0.5s;
+
   .Sidebarbutton {
     position: absolute;
     top: 70px;
@@ -154,18 +171,18 @@ const Container = styled.div`
     padding: 0;
     font-family: inherit;
     outline: none;
-    z-index:100;
+    z-index: 100;
   }
   .Logocontent {
     display: flex;
     justify-content: center;
     align-items: center;
-   
+
     padding-bottom: 30px;
     .imgcontent {
       display: flex;
-      justify-content:center;
-      align-items:center;
+      justify-content: center;
+      align-items: center;
       img {
         max-width: 40%;
         height: auto;
@@ -176,12 +193,12 @@ const Container = styled.div`
     }
     h2 {
       display: ${({ isOpen }) => (isOpen ? `block` : `none`)};
-      padding-right:20px;
+      padding-right: 20px;
     }
   }
   .LinkContainer {
     margin: 8px 0;
-   
+
     padding: 0 15%;
     :hover {
       background: ${(props) => props.theme.bg3};
@@ -192,7 +209,7 @@ const Container = styled.div`
       text-decoration: none;
       padding: calc(${v.smSpacing}-2px) 0;
       color: ${(props) => props.theme.text};
-      height:50px;
+      height: 50px;
       .Linkicon {
         padding: ${v.smSpacing} ${v.mdSpacing};
         display: flex;
@@ -221,7 +238,6 @@ const Container = styled.div`
       opacity: ${({ isOpen }) => (isOpen ? `1` : `0`)};
       transition: all 0.3s;
       white-space: nowrap;
-    
     }
     .Togglecontent {
       margin: ${({ isOpen }) => (isOpen ? `auto 40px` : `auto 15px`)};

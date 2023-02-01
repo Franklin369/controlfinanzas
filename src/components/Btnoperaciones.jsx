@@ -3,7 +3,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { CgMathPlus } from "react-icons/cg";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Icon } from "@rsuite/icons";
-export function ButtonOperacion({ text, link, inputColor, textcolor, tipo,funcion }) {
+export function Btnnuevoregistro({ text, link, inputColor, textcolor, tipo,funcion }) {
   return (
     <a href={link} target="_blank">
       <Btn inputColor={inputColor} textcolor={textcolor} onClick={funcion}>
